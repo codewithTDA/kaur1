@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+label {
+  display: block;
+}
+
+.wrapper {
+  height: 100vh;
+  font-size: 25px;
+}

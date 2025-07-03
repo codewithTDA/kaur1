@@ -27,6 +27,12 @@ export default function App() {
 
     return regex.test(phone);
   };
+  const validatePhoneMin = (phone) => {
+    if (phone.length < 10) {
+      return false;
+    }
+    return true;
+  };
   const submitData = (e) => {
     e.preventDefault()
     if (validateName(name)) {
@@ -44,7 +50,7 @@ export default function App() {
       setIsValidEmail(false);
       setMsgEmail('❌ Please enter a valid email address.');
     }
-    if (validatePhone(phone)) {
+    if (validatePhone(phone) && validatePhoneMin(phone)) {
       setIsValidPhone(true);
       setMsgPhone('✅ Phone number is valid!');
     } else {

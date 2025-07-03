@@ -4,10 +4,13 @@ import { GrValidate } from "react-icons/gr";
 export default function App() {
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [msgName, setMsgName] = useState('');
+  const [msgPhone, setMsgPhone] = useState('');
   const [msgEmail, setMsgEmail] = useState('');
   const [isValidName, setIsValidName] = useState(null);
+  const [isValidPhone, setIsValidPhone] = useState(null);
   const [isValidEmail, setIsValidEmail] = useState(null);
   const validateName = (name) => {
     if (name.length >= 3) {
@@ -18,6 +21,11 @@ export default function App() {
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
+  };
+  const validatePhone = (phone) => {
+    const regex = /^\d{0,10}$/;
+
+    return regex.test(phone);
   };
   const submitData = (e) => {
     e.preventDefault()
@@ -35,6 +43,13 @@ export default function App() {
     } else {
       setIsValidEmail(false);
       setMsgEmail('❌ Please enter a valid email address.');
+    }
+    if (validatePhone(phone)) {
+      setIsValidPhone(true);
+      setMsgPhone('✅ Phone number is valid!');
+    } else {
+      setIsValidPhone(false);
+      setMsgPhone('❌ Please enter a 10 digit number');
     }
   }
   return (
@@ -64,6 +79,16 @@ export default function App() {
               fontSize: '10px',
               fontWeight: "bold"
             }} >  {msgEmail} </p>
+          </div>
+          <div className="phoneFiled">
+            <label htmlFor="phone">Email</label>
+            <input type='phone' className='border-black border-2' onChange={(e) => setPhone(e.target.value)} placeholder='Enter your 10 digit phone number' name="phone" id="phone" maxLength={10} />
+            <p className='phoneErr' style={{
+              color: isValidPhone ? 'green' : 'red',
+              marginTop: '5px',
+              fontSize: '10px',
+              fontWeight: "bold"
+            }} >  {msgPhone} </p>
           </div>
           <div className='submit flex justify-center'>
             <button type="submit " onClick={submitData} className='bg-purple-500 px-5 my-2'>Submit</button>
